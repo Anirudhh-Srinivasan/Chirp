@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0c1017" />
+    <meta
+      name="description"
+      content="Chirp — a little space for your big ideas."
+    />
+    <meta name="api-base" content="http://localhost:8000" />
+    <title>Chirp · A little more connected</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="layout">
+      <aside class="sidebar">
+        <a class="brand" href="./" aria-label="Chirp home"
+          ><span class="brand-icon">c<span>✦</span></span
+          >chirp<span class="brand-dot">.</span></a
+        >
+        <div class="nav-label">YOUR LITTLE CORNER</div>
+        <nav aria-label="Main navigation">
+          <a class="nav-item active" href="#latest"
+            ><span aria-hidden="true">⌂</span> Home
+            <span class="live-dot"></span
+          ></a>
+        </nav>
+        <div class="sidebar-note">
+          <span>✧</span>
+          <h3>Big ideas.<br />Little chirps.</h3>
+          <p>
+            A thought, a discovery, a small win. There’s room for all of it
+            here.
+          </p>
+        </div>
+        <div id="account" class="account" hidden>
+          <div class="avatar" id="accountAvatar"></div>
+          <div>
+            <a id="accountName" href="#latest"></a
+            ><small>You’re part of the conversation</small>
+          </div>
+          <button
+            id="logoutButton"
+            class="icon-button"
+            aria-label="Log out"
+            title="Log out"
+          >
+            ↪
+          </button>
+        </div>
+        <p class="sidebar-footer">
+          Made for real conversations.<br /><span>Less noise. More you.</span>
+        </p>
+      </aside>
+
+      <main id="main">
+        <header class="page-header">
+          <div>
+            <div class="eyebrow">THE CONVERSATION STARTS HERE</div>
+            <h1>Home<span class="brand-dot">.</span></h1>
+          </div>
+          <span class="header-badge"><i></i> A little more connected</span>
+        </header>
+        <div id="notice" class="notice" role="status" hidden></div>
+
+        <section
+          id="authSection"
+          class="auth-card"
+          aria-labelledby="welcomeTitle"
+        >
+          <div class="welcome-copy">
+            <span class="pill">WELCOME TO CHIRP</span>
+            <h2 id="welcomeTitle">
+              Your thoughts.<br />A world of possibility<span>.</span>
+            </h2>
+            <p>
+              Find your people, share your perspective, and make a little
+              connection.
+            </p>
+            <div class="welcome-decoration" aria-hidden="true">
+              ✦ <span>hello, world.</span>
+            </div>
+          </div>
+          <div class="auth-panel">
+            <div class="auth-tabs" role="tablist" aria-label="Account">
+              <button
+                id="loginTab"
+                role="tab"
+                aria-selected="true"
+                aria-controls="loginForm"
+              >
+                Log in</button
+              ><button
+                id="signupTab"
+                role="tab"
+                aria-selected="false"
+                aria-controls="signupForm"
+                tabindex="-1"
+              >
+                Create account
+              </button>
+            </div>
+            <form id="loginForm" role="tabpanel" aria-labelledby="loginTab">
+              <h3>Good to see you again.</h3>
+              <p class="muted">Pick up where you left off.</p>
+              <label for="username">Username</label
+              ><input
+                id="username"
+                name="username"
+                autocomplete="username"
+                maxlength="30"
+                required
+                placeholder="your_username"
+              />
+              <label for="password">Password</label
+              ><input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                maxlength="72"
+                required
+                placeholder="Your password"
+              />
+              <p id="loginError" class="form-error" role="alert" hidden></p>
+              <button class="primary full" type="submit">
+                Log in <span>→</span>
+              </button>
+            </form>
+            <form
+              id="signupForm"
+              role="tabpanel"
+              aria-labelledby="signupTab"
+              hidden
+            >
+              <h3>A fresh start. A new connection.</h3>
+              <p class="muted">Make yourself at home.</p>
+              <label for="newUsername">Username</label
+              ><input
+                id="newUsername"
+                name="username"
+                autocomplete="username"
+                minlength="3"
+                maxlength="30"
+                pattern="[A-Za-z0-9_]+"
+                title="3–30 letters, numbers or underscores"
+                required
+                placeholder="your_username"
+              />
+              <label for="email">Email</label
+              ><input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                maxlength="254"
+                required
+                placeholder="you@example.com"
+              />
+              <label for="newPassword"
+                >Password
+                <span class="muted">· at least 8 characters</span></label
+              ><input
+                id="newPassword"
+                name="password"
+                type="password"
+                autocomplete="new-password"
+                minlength="8"
+                maxlength="72"
+                required
+                placeholder="Make it a good one"
+              />
+              <p id="signupError" class="form-error" role="alert" hidden></p>
+              <button class="primary full" type="submit">
+                Create account <span>→</span>
+              </button>
+            </form>
+            <p class="auth-footnote">A small space. A real community.</p>
+          </div>
+        </section>
+
+        <section id="feedSection" hidden aria-label="Your feed">
+          <form id="searchForm" class="search-bar" role="search">
+            <label class="sr-only" for="searchInput"
+              >Search users and posts</label
+            >
+            <input
+              id="searchInput"
+              type="search"
+              maxlength="100"
+              required
+              placeholder="Search people and chirps…"
+            />
+            <button class="primary" type="submit">Search</button>
+          </form>
+          <nav class="feed-tabs" aria-label="Feed">
+            <a id="latestTab" href="#latest" aria-current="page">Latest</a>
+            <a id="followingTab" href="#following">Following</a>
+            <a id="myProfileLink" href="#latest">My profile</a>
+          </nav>
+          <section
+            id="profileCard"
+            class="profile-card"
+            aria-label="User profile"
+            hidden
+          ></section>
+          <form id="postForm" class="composer">
+            <div class="composer-top">
+              <div id="composerAvatar" class="avatar"></div>
+              <label class="sr-only" for="postContent">Write a post</label
+              ><textarea
+                id="postContent"
+                maxlength="280"
+                placeholder="What’s on your mind?"
+                required
+              ></textarea>
+            </div>
+            <div class="composer-bottom">
+              <span class="muted">A little thought goes a long way.</span>
+              <div>
+                <span id="characterCount" aria-live="polite">0 / 280</span
+                ><button id="postButton" class="primary" type="submit" disabled>
+                  Post a chirp <span>↗</span>
+                </button>
+              </div>
+            </div>
+            <p id="postError" class="form-error" role="alert" hidden></p>
+          </form>
+          <div class="feed-toolbar">
+            <div>
+              <strong id="viewTitle">Latest</strong
+              ><span id="viewDescription">The latest from everyone</span>
+            </div>
+            <button id="refreshButton" class="text-button">↻ Refresh</button>
+          </div>
+          <div id="feedError" class="notice error" role="alert" hidden></div>
+          <div id="feedStatus" class="empty-state" role="status"></div>
+          <div id="userResults" aria-live="polite"></div>
+          <button id="moreUsersButton" class="secondary load-more" hidden>
+            Load more people ↓
+          </button>
+          <div id="posts" aria-live="polite" aria-busy="false"></div>
+          <button id="loadMoreButton" class="secondary load-more" hidden>
+            Load older chirps ↓
+          </button>
+          <p class="feed-footer">
+            You’re right where the conversation happens. ✧
+          </p>
+        </section>
+      </main>
+
+      <aside class="rightbar">
+        <div class="community-card">
+          <div class="eyebrow">A DIFFERENT KIND OF FEED</div>
+          <h2>A little less scrolling.<br />A little more sharing.</h2>
+          <div class="orbit" aria-hidden="true">
+            <span>✦</span><i>✧</i><b>↗</b>
+          </div>
+          <p>The best conversations start with a simple thought.</p>
+        </div>
+        <div class="guidelines">
+          <h3>Good company starts with us <span>✧</span></h3>
+          <p><b>01</b> Be curious. Ask good questions.</p>
+          <p><b>02</b> Be kind. There’s a person behind every post.</p>
+          <p><b>03</b> Be yourself. Your perspective matters.</p>
+        </div>
+        <footer>
+          Chirp · Built for connection<br /><span
+            >A small corner of the internet, done differently.</span
+          >
+        </footer>
+      </aside>
+    </div>
+    <dialog id="deleteDialog">
+      <form method="dialog">
+        <h2>Delete this chirp?</h2>
+        <p>This can’t be undone.</p>
+        <div class="dialog-actions">
+          <button class="secondary" value="cancel">Keep it</button
+          ><button class="danger" value="delete">Delete post</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
